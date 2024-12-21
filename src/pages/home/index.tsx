@@ -54,20 +54,6 @@ const HomePage: React.FunctionComponent<IHomePageProps> = () => {
     });
   };
 
-  const renderListItem = (point: Point) => {
-    const { title, location, id, description } = point;
-
-    return (
-      <ListItemButton key={id} onClick={() => handleEdit(point)}>
-        <Stack direction="column">
-          <Typography level="title-sm">{title}</Typography>
-          <Typography level="body-sm">{description}</Typography>
-          <Typography level="body-sm">{`${location[1]},${location[0]}`}</Typography>
-        </Stack>
-      </ListItemButton>
-    );
-  };
-
   return (
     <>
       <YMaps query={{ apikey: VITE_YANDEX_API_KEY, lang: "ru_RU" }}>
@@ -95,12 +81,37 @@ const HomePage: React.FunctionComponent<IHomePageProps> = () => {
         </Map>
       </YMaps>
 
-      <Drawer>
-        <List>{points.map(renderListItem)}</List>
-      </Drawer>
+      <Drawer>{renderDrawerItems(points, handleEdit)}</Drawer>
 
       <ModalManager registry={homeModalRegistry} />
     </>
+  );
+};
+
+const renderDrawerItems = (points: Point[], handleEdit: (p: Point) => void) => {
+  if (points.length === 0)
+    return (
+      <Typography textAlign="center" py={2}>
+        Нет добавленных точек
+      </Typography>
+    );
+
+  return (
+    <List>
+      {points.map((point: Point) => {
+        const { title, location, id, description } = point;
+
+        return (
+          <ListItemButton key={id} onClick={() => handleEdit(point)}>
+            <Stack direction="column">
+              <Typography level="title-sm">{title}</Typography>
+              <Typography level="body-sm">{description}</Typography>
+              <Typography level="body-sm">{`${location[1]},${location[0]}`}</Typography>
+            </Stack>
+          </ListItemButton>
+        );
+      })}
+    </List>
   );
 };
 

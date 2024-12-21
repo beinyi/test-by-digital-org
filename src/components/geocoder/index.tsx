@@ -21,7 +21,7 @@ const GeocoderSearch: React.FunctionComponent<IGeocoderSearchProps> = ({
 
   const handleDebounceSubmit = debounce(
     (_, value: string) => handleSubmit(value),
-    3000
+    1000
   );
 
   const handleOnChange = (
@@ -50,6 +50,7 @@ const GeocoderSearch: React.FunctionComponent<IGeocoderSearchProps> = ({
       getOptionLabel={(option) =>
         typeof option === "object" ? option.GeoObject.name : option
       }
+      filterOptions={(options) => options}
       renderOption={(props, option) => (
         <ListItem {...props} key={option.GeoObject.Point.pos}>
           <ListItemButton>
