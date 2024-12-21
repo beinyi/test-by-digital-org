@@ -2,6 +2,7 @@ import { IAppModalProps } from "../../../components/modal/AppModal";
 
 export interface UIState<T extends string> {
   modal: ModalState<T>;
+  drawer: DrawerState;
 }
 
 export interface ModalOptions<
@@ -16,7 +17,11 @@ export interface ModalState<T extends string> {
   options?: ModalOptions;
 }
 
-export interface SetPayload {
+export interface SetModalPayload {
   type: string | null;
   options?: ModalOptions;
+}
+
+export interface DrawerState {
+  isOpen: boolean;
 }

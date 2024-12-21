@@ -39,6 +39,10 @@ const GeocoderSearch: React.FunctionComponent<IGeocoderSearchProps> = ({
       onChange={handleOnChange}
       onInputChange={handleDebounceSubmit}
       freeSolo
+      variant="soft"
+      sx={{
+        width: "250px",
+      }}
       autoComplete
       loading={isLoading}
       loadingText="Загрузка..."
@@ -60,6 +64,13 @@ const GeocoderSearch: React.FunctionComponent<IGeocoderSearchProps> = ({
           </ListItemButton>
         </ListItem>
       )}
+      slotProps={{
+        listbox: {
+          sx: {
+            zIndex: (theme) => theme.zIndex.appBar + 1,
+          },
+        },
+      }}
       noOptionsText="Нет данных"
     />
   );

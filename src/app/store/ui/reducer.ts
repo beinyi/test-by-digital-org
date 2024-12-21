@@ -1,20 +1,16 @@
 import { createSlice, Draft, PayloadAction } from "@reduxjs/toolkit";
-import { ModalOptions, UIState } from "./types";
+import { ModalOptions, SetModalPayload, UIState } from "./types";
 
 const initialState: UIState<string> = {
   modal: { modalType: null, options: undefined },
+  drawer: { isOpen: false },
 };
-
-interface SetPayload {
-  type: string | null;
-  options?: ModalOptions;
-}
 
 const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
-    openModal(state, action: PayloadAction<SetPayload>) {
+    openModal(state, action: PayloadAction<SetModalPayload>) {
       state.modal.modalType = action.payload.type;
       state.modal.options =
         (action.payload.options as Draft<ModalOptions>) || undefined;
@@ -23,8 +19,12 @@ const uiSlice = createSlice({
       state.modal.modalType = null;
       state.modal.options = undefined;
     },
+
+    switchDrawer: (state) => {
+      state.drawer.isOpen = !state.drawer.isOpen;
+    },
   },
 });
 
-export const { openModal, closeModal } = uiSlice.actions;
+export const { openModal, closeModal, switchDrawer } = uiSlice.actions;
 export default uiSlice.reducer;
