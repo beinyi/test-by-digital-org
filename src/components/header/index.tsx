@@ -1,4 +1,4 @@
-import { IconButton, Sheet } from "@mui/joy";
+import { Box, IconButton, Sheet } from "@mui/joy";
 import * as React from "react";
 import MenuIcon from "../../app/assets/icons/MenuIcon";
 import useDrawer from "../../app/hooks/useDrawer";
@@ -21,6 +21,17 @@ const sxProps: SxProps = {
   padding: (theme) => theme.spacing(2),
   zIndex: (theme) => theme.zIndex.appBar,
 };
+
+export const DrawerHeader: React.FunctionComponent = () => (
+  <Box
+    sx={
+      {
+        height: sxProps.height,
+        padding: sxProps.padding,
+      } as SxProps
+    }
+  />
+);
 
 const Header: React.FunctionComponent<IHeaderProps> = ({
   children,
