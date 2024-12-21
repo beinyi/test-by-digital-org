@@ -29,26 +29,31 @@ const AppModal: React.FunctionComponent<IAppModalProps> = ({
     <Modal
       open={open}
       onClose={onClose}
-      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       {...modalProps}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        ...modalProps?.sx,
+      }}
     >
       <Sheet
         variant="outlined"
+        {...sheetProps}
         sx={{
           maxWidth: 500,
           minWidth: 200,
           borderRadius: "md",
           p: 3,
           boxShadow: "lg",
+          ...sheetProps?.sx,
         }}
-        {...sheetProps}
       >
         <ModalClose variant="plain" sx={{ m: 1 }} />
         <Typography
-          component="h2"
-          level="h4"
+          level="title-md"
           textColor="inherit"
-          sx={{ fontWeight: "lg", mb: 1 }}
+          sx={{ fontWeight: "lg", mb: 1, pr: 4 }}
         >
           {title}
         </Typography>
