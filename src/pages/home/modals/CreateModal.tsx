@@ -69,7 +69,9 @@ const CreateModal: React.FC<ICreateModalProps> = ({ newPoint }) => {
             name="description"
             control={control}
             rules={{ required: "Описание обязательно" }}
-            render={({ field }) => <Textarea {...field} minRows={2} />}
+            render={({ field }) => (
+              <Textarea {...field} minRows={2} maxRows={5} />
+            )}
           />
           <FormHelperText>{errors.description?.message}</FormHelperText>
         </FormControl>
